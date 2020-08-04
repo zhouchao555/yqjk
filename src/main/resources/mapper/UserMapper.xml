@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhsl.business.demo.mapper.UserMapper" >
+
+    <resultMap id="userInfo" type="com.yhsl.business.demo.dto.UserInfo">
+        <id column="id" property="id" javaType="String"/>
+        <result column="name" property="name" javaType="String"/>
+        <result column="phone" property="phone" javaType="String"/>
+        <collection property="orders" ofType="com.yhsl.business.demo.entity.Order" javaType="java.util.ArrayList">
+            <result property="name" column="oname" />
+            <result property="money" column="money" />
+        </collection>
+
+    </resultMap>
+  <select id="findAll"  resultMap="userInfo">
+     select c.id,c.name,c.phone,o.name as oname,o.money from user c inner join  orderInfo o on c.id=o.userId  where data_status=0
+</select>
+
+    <select id="findUsers"  resultType="com.yhsl.business.demo.entity.User">
+     select * from user where data_status=0
+</select>
+    <select id="findUser"  resultType="com.yhsl.business.demo.entity.User">
+     select * from user where data_status=0 and name=#{name} and phone=#{phone}
+</select>
+
+</mapper>

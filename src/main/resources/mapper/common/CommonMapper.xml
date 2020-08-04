@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhsl.common.mapper.CommonMapper">
+
+    <!--纯sql语句-->
+    <select id="query" resultType="java.util.Map">
+        ${sql}
+    </select>
+
+    <!-- 统计数量 -->
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM (${sql}) AS TOTALCOUNT
+    </select>
+
+    <select id="queryOne" resultType="java.util.Map">
+        ${sql}
+    </select>
+
+    <insert id="insert">
+        ${sql}
+    </insert>
+
+    <update id="update">
+        ${sql}
+    </update>
+
+    <delete id="delete">
+        ${sql}
+    </delete>
+
+</mapper>

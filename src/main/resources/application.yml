@@ -1,0 +1,41 @@
+#------------主配置文件，配置了这个会优先读取里面的属性覆盖主配置文件的属性
+spring:
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+
+
+mybatis-plus:
+# config-location不能和mapper-locations共用，它对应的是mapper文件上的!DOCTYPE configuration和!DOCTYPE mapper
+#  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.yhsl.**.entity
+  global-config:
+    db-config:
+      #逻辑删除配置
+      logic-delete-value: -1
+      #逻辑不删除配置
+      logic-not-delete-value: 0
+      #主键类型 0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: input
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      field-strategy: ignored
+      #驼峰下划线转换
+      table-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+  configuration:
+    #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
+    map-underscore-to-camel-case: true
+    #这个配置使全局的映射器启用或禁用缓存
+    cache-enabled: false
+    #配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: null
+#    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+    ##防止返回的map值为null时，未返回
+    call-setters-on-nulls: true
+    lazy-loading-enabled: false
+
