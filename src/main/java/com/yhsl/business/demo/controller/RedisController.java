@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/redis")
 public class RedisController {
+
     @Autowired
     private RedisKit redisKit;
 
